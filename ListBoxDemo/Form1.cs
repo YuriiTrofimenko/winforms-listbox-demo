@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace ListBoxDemo
         // private List<string> strings;
         // private BindingList<string> strings;
         private BindingList<dynamic> users;
+        private ProgressBar progress;
         public Form1()
         {
             InitializeComponent();
@@ -62,15 +64,23 @@ namespace ListBoxDemo
         private void deleteItemsButton_Click(object sender, EventArgs e)
         {
             // v1
-            /*List<dynamic> toRemove = new List<dynamic>();
+            List<dynamic> toRemove = new List<dynamic>();
+            if (demoListBox.SelectedItems.Count > 0)
+            {
+                showProgress(demoListBox.SelectedItems.Count);
+            }
             foreach (var item in demoListBox.SelectedItems)
             {
                 toRemove.Add(item);
             }
-            toRemove.ForEach((toRemoveItem) => { users.Remove(toRemoveItem); });*/
-
+            toRemove.ForEach((toRemoveItem) => {
+                Thread.Sleep(1000);
+                users.Remove(toRemoveItem);
+                increaseProgress();
+            });
+            goneProgress();
             // v2
-            users =
+            /*users =
                 new BindingList<object>(
                     users.Except(
                         new List<object>(
@@ -78,7 +88,31 @@ namespace ListBoxDemo
                             )
                         ).ToList()
                     );
-            demoListBox.DataSource = users;
+            demoListBox.DataSource = users;*/
+        }
+
+        private void showProgress(int max) {
+            if (progress == null)
+            {
+                progress = new ProgressBar();
+                this.progress.Name = "progress";
+                progress.Maximum = max;
+                progress.Step = 1;
+                progress.Top = this.Height / 2 - progress.Height / 2;
+                progress.Left = this.Width / 2 - progress.Width / 2;
+            }
+            
+            this.Controls.Add(progress);
+        }
+
+        private void increaseProgress() {
+            progress.PerformStep();
+            //progress.Update();
+        }
+
+        private void goneProgress() {
+            this.Controls.Remove(progress);
+            progress.Value = 0;
         }
     }
 }
