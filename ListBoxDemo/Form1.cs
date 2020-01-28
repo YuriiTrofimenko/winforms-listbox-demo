@@ -48,6 +48,8 @@ namespace ListBoxDemo
             "Item 1, column 2, column 3",
             "Item 2, column 2, column 3",
             "Item 3, column 2"});*/
+
+            comboBox1.DataSource = users;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -66,7 +68,17 @@ namespace ListBoxDemo
                 toRemove.Add(item);
             }
             toRemove.ForEach((toRemoveItem) => { users.Remove(toRemoveItem); });*/
+
             // v2
+            users =
+                new BindingList<object>(
+                    users.Except(
+                        new List<object>(
+                            demoListBox.SelectedItems.Cast<object>().ToArray()
+                            )
+                        ).ToList()
+                    );
+            demoListBox.DataSource = users;
         }
     }
 }

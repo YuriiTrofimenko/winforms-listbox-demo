@@ -32,6 +32,7 @@
             this.stringTextBox = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.deleteItemsButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // demoListBox
@@ -69,11 +70,20 @@
             this.deleteItemsButton.UseVisualStyleBackColor = true;
             this.deleteItemsButton.Click += new System.EventHandler(this.deleteItemsButton_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(140, 70);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteItemsButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.stringTextBox);
@@ -91,6 +101,7 @@
         private System.Windows.Forms.TextBox stringTextBox;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button deleteItemsButton;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
